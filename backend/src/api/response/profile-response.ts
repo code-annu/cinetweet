@@ -14,12 +14,12 @@ export function mapToProfileResponse(
   profileDTO: ProfileOutputDTO
 ): ProfileResponse {
   return {
-    id: profileDTO.profile.id,
-    user_id: profileDTO.profile.user_id,
-    fullname: profileDTO.profile.fullname,
-    bio: profileDTO.profile.bio ?? null,
-    profile_picture: profileDTO.profile.profile_picture ?? null,
-    created_at: profileDTO.profile.created_at,
-    updated_at: profileDTO.profile.updated_at,
+    id: profileDTO.user.id,
+    user_id: profileDTO.user.id,
+    fullname: profileDTO.user.fullname,
+    bio: profileDTO.user.bio ?? null,
+    profile_picture: profileDTO.user.profile_picture ?? null,
+    created_at: profileDTO.user.created_at,
+    updated_at: profileDTO.user.updated_at,
   };
 }

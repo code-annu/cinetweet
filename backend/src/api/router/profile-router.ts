@@ -1,33 +1,28 @@
 import { Router } from "express";
 import { ProfileController } from "../controller/ProfileController";
 import { validateRequestBody } from "../middleware/validate-request-body";
-import {
-  createProfileSchema,
-  updateProfileSchema,
-} from "../schema/profile-schema";
+import { validateAuthorization } from "../middleware/validate-authorization";
+import { updateProfileSchema } from "../schema/profile-schema";
 
 const profileRouter = Router();
 const profileController = new ProfileController();
 
-profileRouter.post(
-  "/",
-  validateRequestBody(createProfileSchema),
-  profileController.postCreateProfile.bind(profileController)
-);
-
 profileRouter.get(
   "/",
+  validateAuthorization,
   profileController.getProfile.bind(profileController)
 );
 
 profileRouter.put(
   "/",
+  validateAuthorization,
   validateRequestBody(updateProfileSchema),
   profileController.putUpdateProfile.bind(profileController)
 );
 
 profileRouter.delete(
   "/",
+  validateAuthorization,
   profileController.deleteProfile.bind(profileController)
 );
 

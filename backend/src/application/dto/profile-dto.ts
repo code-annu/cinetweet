@@ -1,11 +1,4 @@
-import { Profile } from "../../domain/entities/profile";
-
-export interface CreateProfileInputDTO {
-  user_id: string;
-  fullname: string;
-  bio?: string;
-  profile_picture?: string;
-}
+import { User } from "../../domain/entities/user";
 
 export interface UpdateProfileInputDTO {
   fullname?: string;
@@ -22,6 +15,6 @@ export interface DeleteProfileInputDTO {
 }
 
 export interface ProfileOutputDTO {
-  profile: Profile;
+  user: User;
 }
 
