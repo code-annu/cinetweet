@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "prisma:mig": "prisma migrate dev --name init",
+    "prisma:gen": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +23,8 @@
     "inversify": "^7.10.4",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
