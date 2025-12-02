@@ -4,13 +4,19 @@ import { TYPES } from "./types";
 // Repositories
 import { IUserRepository } from "../domain/repository/IUserRepository";
 import { ISessionRepository } from "../domain/repository/ISessionRepository";
+import { IProfileRepository } from "../domain/repository/IProfileRepository";
 import { UserRepository } from "../infrastructure/repository/UserRepository";
 import { SessionRepository } from "../infrastructure/repository/SessionRepository";
+import { ProfileRepository } from "../infrastructure/repository/ProfileRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
 import { LoginUsecase } from "../application/usecase/auth/LoginUsecase";
 import { RefreshTokenUsecase } from "../application/usecase/auth/RefreshTokenUsecase";
+import { CreateProfileUsecase } from "../application/usecase/profile/CreateProfileUsecase";
+import { GetProfileUsecase } from "../application/usecase/profile/GetProfileUsecase";
+import { UpdateProfileUsecase } from "../application/usecase/profile/UpdateProfileUsecase";
+import { DeleteProfileUsecase } from "../application/usecase/profile/DeleteProfileUsecase";
 
 const container = new Container();
 
@@ -23,6 +29,11 @@ container
 container
   .bind<ISessionRepository>(TYPES.ISessionRepository)
   .to(SessionRepository)
+  .inSingletonScope();
+
+container
+  .bind<IProfileRepository>(TYPES.IProfileRepository)
+  .to(ProfileRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -39,6 +50,26 @@ container
 container
   .bind<RefreshTokenUsecase>(TYPES.RefreshTokenUsecase)
   .to(RefreshTokenUsecase)
+  .inTransientScope();
+
+container
+  .bind<CreateProfileUsecase>(TYPES.CreateProfileUsecase)
+  .to(CreateProfileUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetProfileUsecase>(TYPES.GetProfileUsecase)
+  .to(GetProfileUsecase)
+  .inTransientScope();
+
+container
+  .bind<UpdateProfileUsecase>(TYPES.UpdateProfileUsecase)
+  .to(UpdateProfileUsecase)
+  .inTransientScope();
+
+container
+  .bind<DeleteProfileUsecase>(TYPES.DeleteProfileUsecase)
+  .to(DeleteProfileUsecase)
   .inTransientScope();
 
 export { container };
