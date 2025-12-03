@@ -12,6 +12,8 @@ import { ProfileRepository } from "../infrastructure/repository/ProfileRepositor
 import { TweetRepository } from "../infrastructure/repository/TweetRepository";
 import { ITweetLikeRepository } from "../domain/repository/ITweetLikeRepository";
 import { TweetLikeRepository } from "../infrastructure/repository/TweetLikeRepository";
+import { ITweetCommentRepository } from "../domain/repository/ITweetCommentRepository";
+import { TweetCommentRepository } from "../infrastructure/repository/TweetCommentRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
@@ -29,6 +31,11 @@ import { DeleteTweetUsecase } from "../application/usecase/tweet/DeleteTweetUsec
 import { GetUserTweetsUsecase } from "../application/usecase/tweet/GetUserTweetsUsecase";
 import { ToggleTweetLikeUsecase } from "../application/usecase/tweet_like/ToggleTweetLikeUsecase";
 import { GetTweetLikesUsecase } from "../application/usecase/tweet_like/GetTweetLikesUsecase";
+import { CreateTweetCommentUsecase } from "../application/usecase/tweet_comment/CreateTweetCommentUsecase";
+import { GetTweetCommentUsecase } from "../application/usecase/tweet_comment/GetTweetCommentUsecase";
+import { UpdateTweetCommentUsecase } from "../application/usecase/tweet_comment/UpdateTweetCommentUsecase";
+import { DeleteTweetCommentUsecase } from "../application/usecase/tweet_comment/DeleteTweetCommentUsecase";
+import { GetCommentsOfTweetUsecase } from "../application/usecase/tweet_comment/GetCommentsOfTweetUsecase";
 
 const container = new Container();
 
@@ -56,6 +63,11 @@ container
 container
   .bind<ITweetLikeRepository>(TYPES.ITweetLikeRepository)
   .to(TweetLikeRepository)
+  .inSingletonScope();
+
+container
+  .bind<ITweetCommentRepository>(TYPES.ITweetCommentRepository)
+  .to(TweetCommentRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -132,6 +144,31 @@ container
 container
   .bind<GetTweetLikesUsecase>(TYPES.GetTweetLikesUsecase)
   .to(GetTweetLikesUsecase)
+  .inTransientScope();
+
+container
+  .bind<CreateTweetCommentUsecase>(TYPES.CreateTweetCommentUsecase)
+  .to(CreateTweetCommentUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetTweetCommentUsecase>(TYPES.GetTweetCommentUsecase)
+  .to(GetTweetCommentUsecase)
+  .inTransientScope();
+
+container
+  .bind<UpdateTweetCommentUsecase>(TYPES.UpdateTweetCommentUsecase)
+  .to(UpdateTweetCommentUsecase)
+  .inTransientScope();
+
+container
+  .bind<DeleteTweetCommentUsecase>(TYPES.DeleteTweetCommentUsecase)
+  .to(DeleteTweetCommentUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetCommentsOfTweetUsecase>(TYPES.GetCommentsOfTweetUsecase)
+  .to(GetCommentsOfTweetUsecase)
   .inTransientScope();
 
 export { container };
