@@ -5,6 +5,7 @@ import authRouter from "./api/router/auth-router";
 import profileRouter from "./api/router/profile-router";
 import { errorHandler } from "./api/middleware/handle-error";
 import { validateAuthorization } from "./api/middleware/validate-authorization";
+import userRouter from "./api/router/user-router";
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(`${BASE_API_URL}/auth`, authRouter);
-app.use(`${BASE_API_URL}/profile`, validateAuthorization, profileRouter);
+app.use(`${BASE_API_URL}/profiles`, validateAuthorization, profileRouter);
+app.use(`${BASE_API_URL}/users`, userRouter);
 
 app.use(errorHandler);
 

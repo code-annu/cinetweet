@@ -11,5 +11,6 @@ export const TYPES = {
   GetMyProfileUsecase: Symbol.for("GetMyProfileUsecase"),
   UpdateProfileUsecase: Symbol.for("UpdateProfileUsecase"),
   DeleteProfileUsecase: Symbol.for("DeleteProfileUsecase"),
+  GetUserProfileUsecase: Symbol.for("GetUserProfileUsecase"),
 };
 

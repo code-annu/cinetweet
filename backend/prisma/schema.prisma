@@ -31,10 +31,10 @@ model Session {
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-// model Tweet {
-//   id         String   @id @default(uuid()) @db.Uuid
-//   user_id    String   @db.Uuid
-//   content    String
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-// }
+model Tweet {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}

@@ -16,6 +16,7 @@ import { RefreshTokenUsecase } from "../application/usecase/auth/RefreshTokenUse
 import { GetMyProfileUsecase } from "../application/usecase/profile/GetMyProfileUsecase";
 import { UpdateProfileUsecase } from "../application/usecase/profile/UpdateProfileUsecase";
 import { DeleteProfileUsecase } from "../application/usecase/profile/DeleteProfileUsecase";
+import { GetUserProfileUsecase } from "../application/usecase/user/GetUserProfileUsecase";
 
 const container = new Container();
 
@@ -64,6 +65,11 @@ container
 container
   .bind<DeleteProfileUsecase>(TYPES.DeleteProfileUsecase)
   .to(DeleteProfileUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetUserProfileUsecase>(TYPES.GetUserProfileUsecase)
+  .to(GetUserProfileUsecase)
   .inTransientScope();
 
 export { container };
