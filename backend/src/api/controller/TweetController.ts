@@ -4,7 +4,10 @@ import { CreateTweetUsecase } from "../../application/usecase/tweet/CreateTweetU
 import { GetTweetUsecase } from "../../application/usecase/tweet/GetTweetUsecase";
 import { UpdateTweetUsecase } from "../../application/usecase/tweet/UpdateTweetUsecase";
 import { DeleteTweetUsecase } from "../../application/usecase/tweet/DeleteTweetUsecase";
-import { CreateTweetInputDTO, UpdateTweetInputDTO } from "../../application/dto/tweet-dto";
+import {
+  CreateTweetInputDTO,
+  UpdateTweetInputDTO,
+} from "../../application/dto/tweet-dto";
 import { mapToTweetResponse } from "../response/tweet-response";
 import { container } from "../../di/container";
 import { AuthRequest } from "../middleware/validate-authorization";
@@ -75,9 +78,7 @@ export class TweetController {
       const userId = req.auth!.userId;
       const input: UpdateTweetInputDTO = req.body;
 
-      if (!tweetId) {
-        throw new BadRequestError("Tweet ID is required");
-      }
+      if (!tweetId) throw new BadRequestError("Tweet ID is required");
 
       const result = await updateTweetUsecase.execute(tweetId, userId, input);
       const response = mapToTweetResponse(result);
@@ -103,9 +104,7 @@ export class TweetController {
       const tweetId = req.params.id;
       const userId = req.auth!.userId;
 
-      if (!tweetId) {
-        throw new BadRequestError("Tweet ID is required");
-      }
+      if (!tweetId) throw new BadRequestError("Tweet ID is required");
 
       await deleteTweetUsecase.execute(tweetId, userId);
 
@@ -117,4 +116,3 @@ export class TweetController {
     }
   }
 }
-

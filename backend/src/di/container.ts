@@ -10,6 +10,8 @@ import { UserRepository } from "../infrastructure/repository/UserRepository";
 import { SessionRepository } from "../infrastructure/repository/SessionRepository";
 import { ProfileRepository } from "../infrastructure/repository/ProfileRepository";
 import { TweetRepository } from "../infrastructure/repository/TweetRepository";
+import { ITweetLikeRepository } from "../domain/repository/ITweetLikeRepository";
+import { TweetLikeRepository } from "../infrastructure/repository/TweetLikeRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
@@ -25,6 +27,8 @@ import { GetTweetUsecase } from "../application/usecase/tweet/GetTweetUsecase";
 import { UpdateTweetUsecase } from "../application/usecase/tweet/UpdateTweetUsecase";
 import { DeleteTweetUsecase } from "../application/usecase/tweet/DeleteTweetUsecase";
 import { GetUserTweetsUsecase } from "../application/usecase/tweet/GetUserTweetsUsecase";
+import { ToggleTweetLikeUsecase } from "../application/usecase/tweet_like/ToggleTweetLikeUsecase";
+import { GetTweetLikesUsecase } from "../application/usecase/tweet_like/GetTweetLikesUsecase";
 
 const container = new Container();
 
@@ -47,6 +51,11 @@ container
 container
   .bind<ITweetRepository>(TYPES.ITweetRepository)
   .to(TweetRepository)
+  .inSingletonScope();
+
+container
+  .bind<ITweetLikeRepository>(TYPES.ITweetLikeRepository)
+  .to(TweetLikeRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -113,6 +122,16 @@ container
 container
   .bind<DeleteTweetUsecase>(TYPES.DeleteTweetUsecase)
   .to(DeleteTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<ToggleTweetLikeUsecase>(TYPES.ToggleTweetLikeUsecase)
+  .to(ToggleTweetLikeUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetTweetLikesUsecase>(TYPES.GetTweetLikesUsecase)
+  .to(GetTweetLikesUsecase)
   .inTransientScope();
 
 export { container };

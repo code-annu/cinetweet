@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { TweetController } from "../controller/TweetController";
+import { TweetLikeController } from "../controller/TweetLikeController";
 import { validateAuthorization } from "../middleware/validate-authorization";
 
 const tweetRouter = Router();
 const tweetController = new TweetController();
+const tweetLikeController = new TweetLikeController();
 
 tweetRouter.post(
   "/",
@@ -11,10 +13,7 @@ tweetRouter.post(
   tweetController.createTweet.bind(tweetController)
 );
 
-tweetRouter.get(
-  "/:id",
-  tweetController.getTweet.bind(tweetController)
-);
+tweetRouter.get("/:id", tweetController.getTweet.bind(tweetController));
 
 tweetRouter.patch(
   "/:id",
@@ -28,5 +27,15 @@ tweetRouter.delete(
   tweetController.deleteTweet.bind(tweetController)
 );
 
-export default tweetRouter;
+tweetRouter.post(
+  "/:id/like",
+  validateAuthorization,
+  tweetLikeController.toggleLike.bind(tweetLikeController)
+);
 
+tweetRouter.get(
+  "/:id/likes",
+  tweetLikeController.getLikes.bind(tweetLikeController)
+);
+
+export default tweetRouter;

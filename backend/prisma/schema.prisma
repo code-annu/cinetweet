@@ -19,6 +19,8 @@ model User {
 
   sessions Session[]
   tweets   Tweet[]
+  likes    TweetLike[]
+  comments TweetComment[]
 }
 
 model Session {
@@ -43,4 +45,31 @@ model Tweet {
   deleted_at DateTime?
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  likes    TweetLike[]
+  comments TweetComment[]
+}
+
+model TweetLike {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  tweet_id   String   @db.Uuid
+  created_at DateTime @default(now())
+
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tweet Tweet @relation(fields: [tweet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([user_id, tweet_id])
+}
+
+model TweetComment {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  tweet_id   String   @db.Uuid
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tweet Tweet @relation(fields: [tweet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
