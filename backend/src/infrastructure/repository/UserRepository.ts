@@ -43,6 +43,21 @@ export class UserRepository implements IUserRepository {
     return user ? mapPrismaUserToDomain(user) : null;
   }
 
+  async searchUsersByUsername(username: string): Promise<User[]> {
+    const users = await prisma.user.findMany({
+      where: {
+        username: {
+          contains: username,
+          mode: "insensitive",
+        },
+      },
+      orderBy: {
+        username: "asc",
+      },
+    });
+    return users.map(mapPrismaUserToDomain);
+  }
+
   async updateUser(id: string, data: UserUpdate): Promise<User | null> {
     const updateData: any = {};
     if (data.email !== undefined) updateData.email = data.email;

@@ -1,4 +1,7 @@
-import { TweetOutputDTO } from "../../application/dto/tweet-dto";
+import {
+  TweetOutputDTO,
+  TweetsOutputDTO,
+} from "../../application/dto/tweet-dto";
 
 export interface TweetResponse {
   id: string;
@@ -22,5 +25,22 @@ export function mapToTweetResponse(tweetDTO: TweetOutputDTO): TweetResponse {
     updated_at: tweetDTO.tweet.updated_at,
     deleted_at: tweetDTO.tweet.deleted_at ?? null,
   };
+}
+
+export type TweetsResponse = TweetResponse[];
+
+export function mapToTweetsResponse(
+  tweetsDTO: TweetsOutputDTO
+): TweetsResponse {
+  return tweetsDTO.tweets.map((tweet) => ({
+    id: tweet.id,
+    user_id: tweet.user_id,
+    content: tweet.content,
+    media_url: tweet.media_url ?? null,
+    is_deleted: tweet.is_deleted,
+    created_at: tweet.created_at,
+    updated_at: tweet.updated_at,
+    deleted_at: tweet.deleted_at ?? null,
+  }));
 }
 

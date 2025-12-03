@@ -24,4 +24,3 @@ export class DeleteTweetUsecase {
     await this.tweetRepository.deleteTweet(tweetId);
   }
 }
-

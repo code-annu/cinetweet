@@ -31,9 +31,6 @@ export class UpdateTweetUsecase {
       throw new NotFoundError("Tweet not found");
     }
 
-    return {
-      tweet,
-    };
+    return { tweet };
   }
 }
-

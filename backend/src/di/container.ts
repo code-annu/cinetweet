@@ -19,10 +19,12 @@ import { GetMyProfileUsecase } from "../application/usecase/profile/GetMyProfile
 import { UpdateProfileUsecase } from "../application/usecase/profile/UpdateProfileUsecase";
 import { DeleteProfileUsecase } from "../application/usecase/profile/DeleteProfileUsecase";
 import { GetUserProfileUsecase } from "../application/usecase/user/GetUserProfileUsecase";
+import { SearchUsersByUsernameUsecase } from "../application/usecase/user/SearchUsersByUsernameUsecase";
 import { CreateTweetUsecase } from "../application/usecase/tweet/CreateTweetUsecase";
 import { GetTweetUsecase } from "../application/usecase/tweet/GetTweetUsecase";
 import { UpdateTweetUsecase } from "../application/usecase/tweet/UpdateTweetUsecase";
 import { DeleteTweetUsecase } from "../application/usecase/tweet/DeleteTweetUsecase";
+import { GetUserTweetsUsecase } from "../application/usecase/tweet/GetUserTweetsUsecase";
 
 const container = new Container();
 
@@ -84,6 +86,11 @@ container
   .inTransientScope();
 
 container
+  .bind<SearchUsersByUsernameUsecase>(TYPES.SearchUsersByUsernameUsecase)
+  .to(SearchUsersByUsernameUsecase)
+  .inTransientScope();
+
+container
   .bind<CreateTweetUsecase>(TYPES.CreateTweetUsecase)
   .to(CreateTweetUsecase)
   .inTransientScope();
@@ -91,6 +98,11 @@ container
 container
   .bind<GetTweetUsecase>(TYPES.GetTweetUsecase)
   .to(GetTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetUserTweetsUsecase>(TYPES.GetUserTweetsUsecase)
+  .to(GetUserTweetsUsecase)
   .inTransientScope();
 
 container

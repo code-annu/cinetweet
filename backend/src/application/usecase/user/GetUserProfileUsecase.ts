@@ -13,7 +13,7 @@ export class GetUserProfileUsecase {
   ) {}
 
   async execute(input: GetUserProfileInputDTO): Promise<UserProfileOutputDTO> {
-    const user = await this.userRepository.getUserByUsername(input.username);
+    const user = await this.userRepository.getUserById(input.userId);
     if (!user) {
       throw new NotFoundError("User not found");
     }

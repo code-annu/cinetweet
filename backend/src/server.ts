@@ -21,7 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(`${BASE_API_URL}/auth`, authRouter);
-app.use(`${BASE_API_URL}/profiles`, validateAuthorization, profileRouter);
+app.use(`${BASE_API_URL}/profile`, validateAuthorization, profileRouter);
 app.use(`${BASE_API_URL}/users`, userRouter);
 app.use(`${BASE_API_URL}/tweets`, tweetRouter);
 

@@ -5,7 +5,17 @@ const userRouter = Router();
 const userController = new UserController();
 
 userRouter.get(
-  "/:username",
+  "/search",
+  userController.searchUsersByUsername.bind(userController)
+);
+
+userRouter.get(
+  "/:userId/tweets",
+  userController.getUserTweets.bind(userController)
+);
+
+userRouter.get(
+  "/:userId",
   userController.getUserProfile.bind(userController)
 );
 

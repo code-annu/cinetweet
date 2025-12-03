@@ -13,8 +13,10 @@ export const TYPES = {
   UpdateProfileUsecase: Symbol.for("UpdateProfileUsecase"),
   DeleteProfileUsecase: Symbol.for("DeleteProfileUsecase"),
   GetUserProfileUsecase: Symbol.for("GetUserProfileUsecase"),
+  SearchUsersByUsernameUsecase: Symbol.for("SearchUsersByUsernameUsecase"),
   CreateTweetUsecase: Symbol.for("CreateTweetUsecase"),
   GetTweetUsecase: Symbol.for("GetTweetUsecase"),
+  GetUserTweetsUsecase: Symbol.for("GetUserTweetsUsecase"),
   UpdateTweetUsecase: Symbol.for("UpdateTweetUsecase"),
   DeleteTweetUsecase: Symbol.for("DeleteTweetUsecase"),
 };
