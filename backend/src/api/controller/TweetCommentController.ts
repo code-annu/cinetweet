@@ -41,7 +41,7 @@ export class TweetCommentController {
 
       res.status(201).json({
         message: "Comment created successfully",
-        data: response,
+        comment: response,
       });
     } catch (error) {
       next(error);
@@ -68,7 +68,7 @@ export class TweetCommentController {
 
       res.status(200).json({
         message: "Comment retrieved successfully",
-        data: response,
+        comment: response,
       });
     } catch (error) {
       next(error);
@@ -102,7 +102,7 @@ export class TweetCommentController {
 
       res.status(200).json({
         message: "Comment updated successfully",
-        data: response,
+        comment: response,
       });
     } catch (error) {
       next(error);
