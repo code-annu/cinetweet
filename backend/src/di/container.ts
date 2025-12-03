@@ -4,14 +4,16 @@ import { TYPES } from "./types";
 // Repositories
 import { IUserRepository } from "../domain/repository/IUserRepository";
 import { ISessionRepository } from "../domain/repository/ISessionRepository";
+import { IProfileRepository } from "../domain/repository/IProfileRepository";
 import { UserRepository } from "../infrastructure/repository/UserRepository";
 import { SessionRepository } from "../infrastructure/repository/SessionRepository";
+import { ProfileRepository } from "../infrastructure/repository/ProfileRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
 import { LoginUsecase } from "../application/usecase/auth/LoginUsecase";
 import { RefreshTokenUsecase } from "../application/usecase/auth/RefreshTokenUsecase";
-import { GetProfileUsecase } from "../application/usecase/profile/GetProfileUsecase";
+import { GetMyProfileUsecase } from "../application/usecase/profile/GetMyProfileUsecase";
 import { UpdateProfileUsecase } from "../application/usecase/profile/UpdateProfileUsecase";
 import { DeleteProfileUsecase } from "../application/usecase/profile/DeleteProfileUsecase";
 
@@ -26,6 +28,11 @@ container
 container
   .bind<ISessionRepository>(TYPES.ISessionRepository)
   .to(SessionRepository)
+  .inSingletonScope();
+
+container
+  .bind<IProfileRepository>(TYPES.IProfileRepository)
+  .to(ProfileRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -45,8 +52,8 @@ container
   .inTransientScope();
 
 container
-  .bind<GetProfileUsecase>(TYPES.GetProfileUsecase)
-  .to(GetProfileUsecase)
+  .bind<GetMyProfileUsecase>(TYPES.GetMyProfileUsecase)
+  .to(GetMyProfileUsecase)
   .inTransientScope();
 
 container
@@ -60,4 +67,3 @@ container
   .inTransientScope();
 
 export { container };
-

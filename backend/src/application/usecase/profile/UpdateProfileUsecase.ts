@@ -1,49 +1,57 @@
 import { inject, injectable } from "inversify";
-import { IUserRepository } from "../../../domain/repository/IUserRepository";
+import { IProfileRepository } from "../../../domain/repository/IProfileRepository";
 import { UpdateProfileInputDTO, ProfileOutputDTO } from "../../dto/profile-dto";
 import { NotFoundError } from "../../../domain/error/NotFoundError";
 import { TYPES } from "../../../di/types";
-import { UserUpdate } from "../../../domain/entities/user";
 
 @injectable()
 export class UpdateProfileUsecase {
   constructor(
-    @inject(TYPES.IUserRepository)
-    private userRepository: IUserRepository
+    @inject(TYPES.IProfileRepository)
+    private profileRepository: IProfileRepository
   ) {}
 
   async execute(
     userId: string,
     input: UpdateProfileInputDTO
   ): Promise<ProfileOutputDTO> {
-    // Get existing user
-    const existingUser = await this.userRepository.getUserById(userId);
-    if (!existingUser) {
+    // Get existing profile
+    const existingProfile = await this.profileRepository.getProfileByUserId(
+      userId
+    );
+    if (!existingProfile) {
       throw new NotFoundError("Profile not found");
     }
 
     // Build update object with only defined properties
-    const updateData: UserUpdate = {};
+    const updateData: {
+      fullname?: string;
+      bio?: string | null;
+      profile_picture?: string | null;
+    } = {};
     
     if (input.fullname !== undefined) {
       updateData.fullname = input.fullname;
     }
     if (input.bio !== undefined) {
-      updateData.bio = input.bio ?? null;
+      updateData.bio = input.bio;
     }
     if (input.profile_picture !== undefined) {
-      updateData.profile_picture = input.profile_picture ?? null;
+      updateData.profile_picture = input.profile_picture;
     }
 
-    // Update user profile
-    const user = await this.userRepository.updateUser(userId, updateData);
+    // Update profile
+    const profile = await this.profileRepository.updateProfile(
+      existingProfile.id,
+      updateData
+    );
 
-    if (!user) {
+    if (!profile) {
       throw new NotFoundError("Profile not found");
     }
 
     return {
-      user,
+      profile,
     };
   }
 }

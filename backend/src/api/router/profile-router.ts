@@ -10,7 +10,7 @@ const profileController = new ProfileController();
 profileRouter.get(
   "/",
   validateAuthorization,
-  profileController.getProfile.bind(profileController)
+  profileController.getMyProfile.bind(profileController)
 );
 
 profileRouter.put(
