@@ -3,6 +3,7 @@ export const TYPES = {
   IUserRepository: Symbol.for("IUserRepository"),
   ISessionRepository: Symbol.for("ISessionRepository"),
   IProfileRepository: Symbol.for("IProfileRepository"),
+  ITweetRepository: Symbol.for("ITweetRepository"),
 
   // Use Cases
   SignupUsecase: Symbol.for("SignupUsecase"),
@@ -12,5 +13,9 @@ export const TYPES = {
   UpdateProfileUsecase: Symbol.for("UpdateProfileUsecase"),
   DeleteProfileUsecase: Symbol.for("DeleteProfileUsecase"),
   GetUserProfileUsecase: Symbol.for("GetUserProfileUsecase"),
+  CreateTweetUsecase: Symbol.for("CreateTweetUsecase"),
+  GetTweetUsecase: Symbol.for("GetTweetUsecase"),
+  UpdateTweetUsecase: Symbol.for("UpdateTweetUsecase"),
+  DeleteTweetUsecase: Symbol.for("DeleteTweetUsecase"),
 };
 

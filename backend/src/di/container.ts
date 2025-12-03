@@ -5,9 +5,11 @@ import { TYPES } from "./types";
 import { IUserRepository } from "../domain/repository/IUserRepository";
 import { ISessionRepository } from "../domain/repository/ISessionRepository";
 import { IProfileRepository } from "../domain/repository/IProfileRepository";
+import { ITweetRepository } from "../domain/repository/ITweetRepository";
 import { UserRepository } from "../infrastructure/repository/UserRepository";
 import { SessionRepository } from "../infrastructure/repository/SessionRepository";
 import { ProfileRepository } from "../infrastructure/repository/ProfileRepository";
+import { TweetRepository } from "../infrastructure/repository/TweetRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
@@ -17,6 +19,10 @@ import { GetMyProfileUsecase } from "../application/usecase/profile/GetMyProfile
 import { UpdateProfileUsecase } from "../application/usecase/profile/UpdateProfileUsecase";
 import { DeleteProfileUsecase } from "../application/usecase/profile/DeleteProfileUsecase";
 import { GetUserProfileUsecase } from "../application/usecase/user/GetUserProfileUsecase";
+import { CreateTweetUsecase } from "../application/usecase/tweet/CreateTweetUsecase";
+import { GetTweetUsecase } from "../application/usecase/tweet/GetTweetUsecase";
+import { UpdateTweetUsecase } from "../application/usecase/tweet/UpdateTweetUsecase";
+import { DeleteTweetUsecase } from "../application/usecase/tweet/DeleteTweetUsecase";
 
 const container = new Container();
 
@@ -34,6 +40,11 @@ container
 container
   .bind<IProfileRepository>(TYPES.IProfileRepository)
   .to(ProfileRepository)
+  .inSingletonScope();
+
+container
+  .bind<ITweetRepository>(TYPES.ITweetRepository)
+  .to(TweetRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -70,6 +81,26 @@ container
 container
   .bind<GetUserProfileUsecase>(TYPES.GetUserProfileUsecase)
   .to(GetUserProfileUsecase)
+  .inTransientScope();
+
+container
+  .bind<CreateTweetUsecase>(TYPES.CreateTweetUsecase)
+  .to(CreateTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetTweetUsecase>(TYPES.GetTweetUsecase)
+  .to(GetTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<UpdateTweetUsecase>(TYPES.UpdateTweetUsecase)
+  .to(UpdateTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<DeleteTweetUsecase>(TYPES.DeleteTweetUsecase)
+  .to(DeleteTweetUsecase)
   .inTransientScope();
 
 export { container };
