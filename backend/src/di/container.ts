@@ -14,6 +14,8 @@ import { ITweetLikeRepository } from "../domain/repository/ITweetLikeRepository"
 import { TweetLikeRepository } from "../infrastructure/repository/TweetLikeRepository";
 import { ITweetCommentRepository } from "../domain/repository/ITweetCommentRepository";
 import { TweetCommentRepository } from "../infrastructure/repository/TweetCommentRepository";
+import { IUserFollowsRepository } from "../domain/repository/IUserFollowsRepository";
+import { UserFollowsRepository } from "../infrastructure/repository/UserFollowsRepository";
 
 // Use Cases
 import { SignupUsecase } from "../application/usecase/auth/SignupUsecase";
@@ -36,6 +38,9 @@ import { GetTweetCommentUsecase } from "../application/usecase/tweet_comment/Get
 import { UpdateTweetCommentUsecase } from "../application/usecase/tweet_comment/UpdateTweetCommentUsecase";
 import { DeleteTweetCommentUsecase } from "../application/usecase/tweet_comment/DeleteTweetCommentUsecase";
 import { GetCommentsOfTweetUsecase } from "../application/usecase/tweet_comment/GetCommentsOfTweetUsecase";
+import { ToggleUserFollowUsecase } from "../application/usecase/user_follows/ToggleUserFollowUsecase";
+import { GetUserFollowersUsecase } from "../application/usecase/user_follows/GetUserFollowersUsecase";
+import { GetUserFollowingUsecase } from "../application/usecase/user_follows/GetUserFollowingUsecase";
 
 const container = new Container();
 
@@ -68,6 +73,11 @@ container
 container
   .bind<ITweetCommentRepository>(TYPES.ITweetCommentRepository)
   .to(TweetCommentRepository)
+  .inSingletonScope();
+
+container
+  .bind<IUserFollowsRepository>(TYPES.IUserFollowsRepository)
+  .to(UserFollowsRepository)
   .inSingletonScope();
 
 // Bind Use Cases
@@ -169,6 +179,21 @@ container
 container
   .bind<GetCommentsOfTweetUsecase>(TYPES.GetCommentsOfTweetUsecase)
   .to(GetCommentsOfTweetUsecase)
+  .inTransientScope();
+
+container
+  .bind<ToggleUserFollowUsecase>(TYPES.ToggleUserFollowUsecase)
+  .to(ToggleUserFollowUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetUserFollowersUsecase>(TYPES.GetUserFollowersUsecase)
+  .to(GetUserFollowersUsecase)
+  .inTransientScope();
+
+container
+  .bind<GetUserFollowingUsecase>(TYPES.GetUserFollowingUsecase)
+  .to(GetUserFollowingUsecase)
   .inTransientScope();
 
 export { container };

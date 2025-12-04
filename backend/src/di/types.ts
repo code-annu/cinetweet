@@ -29,4 +29,9 @@ export const TYPES = {
   UpdateTweetCommentUsecase: Symbol.for("UpdateTweetCommentUsecase"),
   DeleteTweetCommentUsecase: Symbol.for("DeleteTweetCommentUsecase"),
   GetCommentsOfTweetUsecase: Symbol.for("GetCommentsOfTweetUsecase"),
+
+  IUserFollowsRepository: Symbol.for("IUserFollowsRepository"),
+  ToggleUserFollowUsecase: Symbol.for("ToggleUserFollowUsecase"),
+  GetUserFollowersUsecase: Symbol.for("GetUserFollowersUsecase"),
+  GetUserFollowingUsecase: Symbol.for("GetUserFollowingUsecase"),
 };

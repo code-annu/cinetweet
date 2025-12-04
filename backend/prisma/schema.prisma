@@ -21,6 +21,9 @@ model User {
   tweets   Tweet[]
   likes    TweetLike[]
   comments TweetComment[]
+
+  followers UserFollows[] @relation("followers")
+  following UserFollows[] @relation("following")
 }
 
 model Session {
@@ -72,4 +75,15 @@ model TweetComment {
 
   user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   tweet Tweet @relation(fields: [tweet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model UserFollows {
+  follower_id  String   @db.Uuid
+  following_id String   @db.Uuid
+  created_at   DateTime @default(now())
+
+  follower  User @relation("following", fields: [follower_id], references: [id], onDelete: Cascade)
+  following User @relation("followers", fields: [following_id], references: [id], onDelete: Cascade)
+
+  @@id([follower_id, following_id])
 }
